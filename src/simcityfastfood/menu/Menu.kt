@@ -6,7 +6,6 @@ import simcityfastfood.util.MSG_OPCAO_INVALIDA
 import kotlin.system.exitProcess
 
 class Menu {
-
     init {
         println("----------  LANCHONETE  ----------")
         println("---------- SIMCITY FOOD ----------")
@@ -18,9 +17,7 @@ class Menu {
             println("O que deseja comprar?")
             println("[1] - Lanches")
             println("[2] - Bebidas")
-            println("[3] - Ver Carrinho de Compras")
-            println("[4] - Remover item")
-            println("[5] - Sair")
+            println("[3] - Sair")
 
             when (readln().toInt()) {
 
@@ -31,14 +28,6 @@ class Menu {
                     menuBebidas()
                 }
                 3 -> {
-                    Carrinho.mostrarProdutoCarrinho()
-                    menuPrincipal()
-                }
-                4 -> {
-                    Carrinho.removerProdutoCarrinho()
-                    menuPrincipal()
-                }
-                5 -> {
                     println("SimCity Food agradece a preferência! Volte Sempre!")
                     exitProcess(10)
                 }
@@ -47,7 +36,6 @@ class Menu {
                     menuPrincipal()
                 }
             }
-
         } catch (exception: NumberFormatException) {
             println(MSG_FORMATO_INVALIDO)
         }
@@ -77,7 +65,7 @@ class Menu {
                     menuLanche()
                 }
             }
-            menuPrincipal()
+            menuSecundario()
         } catch (exception: NumberFormatException) {
             println(MSG_FORMATO_INVALIDO)
             menuLanche()
@@ -108,10 +96,45 @@ class Menu {
                     menuBebidas()
                 }
             }
-            menuPrincipal()
+            menuSecundario()
         } catch (exception: NumberFormatException) {
             println(MSG_FORMATO_INVALIDO)
             menuBebidas()
+        }
+    }
+
+    fun menuSecundario(){
+        try {
+            println("O que deseja fazer?")
+            println("[1] - Inserir Produto no carrinho")
+            println("[2] - Remover Produto do carrinho")
+            println("[3] - Exibir carrinho")
+            println("[4] - Finalizar pedido")
+
+            when (readln().toInt()) {
+                1 -> {
+                    menuPrincipal()
+                }
+                2 -> {
+                    Carrinho.removerProdutoCarrinho()
+                    menuSecundario()
+                }
+                3 -> {
+                    Carrinho.mostrarProdutoCarrinho()
+                    menuSecundario()
+                }
+                4 -> {
+                    println("SimCity Food agradece a preferência! Volte Sempre!")
+                    exitProcess(10)
+                }
+                else -> {
+                    println(MSG_OPCAO_INVALIDA)
+                    menuSecundario()
+                }
+            }
+        } catch (exception: NumberFormatException) {
+            println(MSG_FORMATO_INVALIDO)
+            menuSecundario()
         }
     }
 }

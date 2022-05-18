@@ -80,11 +80,6 @@ object Carrinho {
             removerProdutoCarrinho()
         }
     }
-
-    fun alterarProdutoCarrinho(){
-
-    }
-
 }
 
 
